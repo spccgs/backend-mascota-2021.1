@@ -1,6 +1,6 @@
 export * from './vacuna.model';
 export * from './vacuna-mascota.model';
-export * from './macota.model';
+export * from './mascotas.model';
 export * from './historia-medica.model';
 export * from './departamento.model';
 export * from './ciudad.model';

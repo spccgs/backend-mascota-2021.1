@@ -1,7 +1,7 @@
 import {Entity, model, property} from '@loopback/repository';
 
 @model()
-export class Macota extends Entity {
+export class Mascotas extends Entity {
   @property({
     type: 'number',
     id: true,
@@ -39,13 +39,13 @@ export class Macota extends Entity {
   })
   imagen?: string;
 
-  constructor(data?: Partial<Macota>) {
+  constructor(data?: Partial<Mascotas>) {
     super(data);
   }
 }
 
-export interface MacotaRelations {
+export interface MascotasRelations {
   // describe navigational properties here
 }
 
-export type MacotaWithRelations = Macota & MacotaRelations;
+export type MascotasWithRelations = Mascotas & MascotasRelations;
