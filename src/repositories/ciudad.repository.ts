@@ -1,27 +1,22 @@
-import {inject, Getter} from '@loopback/core';
-import {DefaultCrudRepository, repository, BelongsToAccessor, HasManyRepositoryFactory} from '@loopback/repository';
+import {inject} from '@loopback/core';
+import {DefaultCrudRepository} from '@loopback/repository';
 import {MysqldsDataSource} from '../datasources';
-import {Ciudad, CiudadRelations, Departamento, Mascotas} from '../models';
-import {DepartamentoRepository} from './departamento.repository';
-import {MascotasRepository} from './mascotas.repository';
+import {Ciudad, CiudadRelations} from '../models';
 
 export class CiudadRepository extends DefaultCrudRepository<
   Ciudad,
   typeof Ciudad.prototype.id,
   CiudadRelations
 > {
-
-  public readonly departamento: BelongsToAccessor<Departamento, typeof Ciudad.prototype.id>;
-
-  public readonly mascotas: HasManyRepositoryFactory<Mascotas, typeof Ciudad.prototype.id>;
-
+  mascotas(id: number) {
+    throw new Error('Method not implemented.');
+  }
+  departamento(id: number | undefined): import("../models").Departamento | PromiseLike<import("../models").Departamento> {
+    throw new Error('Method not implemented.');
+  }
   constructor(
-    @inject('datasources.mysqlds') dataSource: MysqldsDataSource, @repository.getter('DepartamentoRepository') protected departamentoRepositoryGetter: Getter<DepartamentoRepository>, @repository.getter('MascotasRepository') protected mascotasRepositoryGetter: Getter<MascotasRepository>,
+    @inject('datasources.mysqlds') dataSource: MysqldsDataSource,
   ) {
     super(Ciudad, dataSource);
-    this.mascotas = this.createHasManyRepositoryFactoryFor('mascotas', mascotasRepositoryGetter,);
-    this.registerInclusionResolver('mascotas', this.mascotas.inclusionResolver);
-    this.departamento = this.createBelongsToAccessorFor('departamento', departamentoRepositoryGetter,);
-    this.registerInclusionResolver('departamento', this.departamento.inclusionResolver);
   }
 }

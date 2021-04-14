@@ -18,15 +18,14 @@ export class Usuario extends Entity {
 
   @property({
     type: 'string',
-    required: true,
   })
-  clave: string;
+  clave?: string;
 
   @property({
     type: 'number',
-    required: true,
+    required: false,
   })
-  id_persona: number;
+  id_persona?: number;
 
   @belongsTo(() => Rol)
   rolId: string;
@@ -41,3 +40,4 @@ export interface UsuarioRelations {
 }
 
 export type UsuarioWithRelations = Usuario & UsuarioRelations;
+  
